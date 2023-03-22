@@ -1,0 +1,28 @@
+[
+  {
+    "origin": [
+      "http://localhost:3000", 
+      "http://staging.pincubes.com",
+      "http://staging.pin-cube.com",
+      "http://pin-cube.com",
+      "http://pincubed.com",
+      "http://pincubed.io",
+      "http://pincubes.com",
+      "http://www.pin-cube.com",
+      "http://www.pincubed.com",
+      "http://www.pincubed.io",
+      "http://www.pincubes.com",
+      "https://pin-cube.com",
+      "https://pincubed.com",
+      "https://pincubed.io",
+      "https://pincubes.com",
+      "https://www.pin-cube.com",
+      "https://www.pincubed.com",
+      "https://www.pincubed.io",
+      "https://www.pincubes.com",
+      "https://sindy.pincubed.com"
+    ],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600
+  }
+]

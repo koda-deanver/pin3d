@@ -1,0 +1,184 @@
+
+= render 'layouts/includes/theme_selector'
+#cube-collab-indicator
+  .indicator-holder
+    .title 
+      / %i.fa.fa-header.text-success 
+      %span Cube Name
+    .description
+    %p.uilabels.text-md
+      %span.label.label-info
+        %i.fa.fa-info
+        Collaborator
+    %i.fa.fa-caret-down.fav-cube
+%section.show-profile.row{:style => ""}
+  .col-xs-12.col-sm-2.col-md-2.col-lg-2.sub-profile.no-padding
+    %section.box.image
+      .uprofile-image
+        %img.img-responsive{:alt => "", :src => ''}/
+    %h4 
+      %strong COLLABORATORS
+    %section.box.collaborators
+      .actions.panel_actions.pull-right
+        %a#add-collab.fa.fa-plus-circle
+
+      .wid-notification
+        %ul.list-unstyled.notification-widget.ps-container.ps-active-y{:style => "height: 315px;"}
+
+      #dialog_add_collab{title: "Add Collaborators", style: "display:none; overflow: unset;"}
+        .input-group
+          %span.input-group-addon
+            %i.fa.fa-envelope
+          %span.twitter-typeahead{:style => "position: relative; display: inline-block; direction: ltr;"}
+            %input#collab.form-control
+        / %input#added-collab
+
+  .col-xs-12.col-sm-5.col-md-5.col-lg-5.main-profile
+    .uprofile-name
+      %h1.text-capitalize.pull-left.show-name PROFILE NAME
+      %a.btn.btn-default.pull-right{href: edit_profile_users_path}
+        %i.fa.fa-edit
+
+    .uprofile-content.row{style: "margin:0; padding: 0; min-height: inherit;"}
+      .timeline2-centered{style: "margin-bottom: 0;"}
+        %article.timeline2-entry{style: "margin-top: 0 !important"}
+          .timeline2-entry-inner
+            .timeline2-label{style: "margin-top: 0 !important"}
+              %h2
+                %strong GAMER TAG
+                %span.show-gamer-tag.pull-right
+        %article.timeline2-entry
+          .timeline2-entry-inner
+            .timeline2-label
+              %h2
+                %strong AGE
+                %span.show-age-group.pull-right
+        %article.timeline2-entry
+          .timeline2-entry-inner
+            .timeline2-label
+              %h2
+                %strong WORK
+                %span.uprofile-title.show-occupation.pull-right
+        / %article.timeline2-entry
+        /   .timeline2-entry-inner
+        /     .timeline2-label
+        /       %h2
+        /         %strong Favorite Color:
+        /         %span.show-favorite-color
+        / %article.timeline2-entry
+        /   .timeline2-entry-inner
+        /     .timeline2-label
+        /       %h2
+        /         %strong Favorite Genre:
+        /         %span.show-genre
+        %article.timeline2-entry
+          .timeline2-entry-inner
+            .timeline2-label{style: "min-height: 264px;"}
+              %h2
+                %strong ABOUT ME
+              %p.show-bio
+
+  .col-xs-12.col-sm-5.col-md-5.col-lg-5.questions
+    / .input-group
+    /   %span.input-group-addon
+    /     %i.fa.fa-envelope
+    /   %span.twitter-typeahead{:style => "position: relative; display: inline-block; direction: ltr;"}
+    /     %input#collab.form-control
+    / %input#added-collab{disabled: 'true'}
+
+    #questions-holder.panel-group.primary{"aria-multiselectable" => "true", :role => "tablist"}
+      .panel.panel-default#panel-0
+        #headingOne2.panel-heading{:role => "tab"}
+          %h4.panel-title
+            %a.collapsed{"aria-controls" => "collapseTwo-1", "aria-expanded" => "false", "data-parent" => "#questions-holder", "data-toggle" => "collapse", :href => "#collapseTwo-1"}
+              / %i.fa.fa-chevron-circle-down
+              Question 1
+
+        #collapseTwo-1.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+          .panel-body
+            Anim pariatur cliche reprehenderit
+
+    
+      .panel.panel-default#panel-1
+        #headingOne2.panel-heading{:role => "tab"}
+          %h4.panel-title
+            %a.collapsed{"aria-controls" => "collapseTwo-2", "aria-expanded" => "false", "data-parent" => "#questions-holder", "data-toggle" => "collapse", :href => "#collapseTwo-2"}
+              / %i.fa.fa-chevron-circle-down
+              Question 2
+        #collapseTwo-2.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+          .panel-body
+            Anim pariatur cliche reprehenderit
+
+    
+      .panel.panel-default#panel-2
+        #headingOne2.panel-heading{:role => "tab"}
+          %h4.panel-title
+            %a.collapsed{"aria-controls" => "collapseTwo-3", "aria-expanded" => "false", "data-parent" => "#questions-holder", "data-toggle" => "collapse", :href => "#collapseTwo-3"}
+              / %i.fa.fa-chevron-circle-down
+              Question 3
+        #collapseTwo-3.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+          .panel-body
+            Anim pariatur cliche reprehenderit
+
+    
+      .panel.panel-default#panel-3
+        #headingOne2.panel-heading{:role => "tab"}
+          %h4.panel-title
+            %a.collapsed{"aria-controls" => "collapseTwo-4", "aria-expanded" => "false", "data-parent" => "#questions-holder", "data-toggle" => "collapse", :href => "#collapseTwo-4"}
+              / %i.fa.fa-chevron-circle-down
+              Question 4
+        #collapseTwo-4.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+          .panel-body
+            Anim pariatur cliche reprehenderit
+
+    
+      .panel.panel-default#panel-4
+        #headingOne2.panel-heading{:role => "tab"}
+          %h4.panel-title
+            %a.collapsed{"aria-controls" => "collapseTwo-5", "aria-expanded" => "false", "data-parent" => "#questions-holder", "data-toggle" => "collapse", :href => "#collapseTwo-5"}
+              / %i.fa.fa-chevron-circle-down
+              Question 5
+        #collapseTwo-5.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+          .panel-body
+            Anim pariatur cliche reprehenderit
+
+    
+      .panel.panel-default#panel-5
+        #headingOne2.panel-heading{:role => "tab"}
+          %h4.panel-title
+            %a.collapsed{"aria-controls" => "collapseTwo-6", "aria-expanded" => "false", "data-parent" => "#questions-holder", "data-toggle" => "collapse", :href => "#collapseTwo-6"}
+              / %i.fa.fa-chevron-circle-down
+              Question 6
+        #collapseTwo-6.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+          .panel-body
+            Anim pariatur cliche reprehenderit
+%section.row.all-cubes.noselect.show-profile
+  .sub-profile
+    %h4
+      %strong FAVOURITE CUBES
+  .favorite-cubes
+    .cubes-holder.no-padding{:style => "margin-top: 20px;"}
+      / .cube-inline#fav-cube-0
+      /   .container-cube
+      /     .favorite-cube
+      /       .fav-cube-name
+      / .cube-inline#fav-cube-1
+      /   .container-cube
+      /     .favorite-cube
+      /       .fav-cube-name
+      / .cube-inline#fav-cube-2
+      /   .container-cube
+      /     .favorite-cube
+      /       .fav-cube-name
+      / .cube-inline#fav-cube-3
+      /   .container-cube
+      /     .favorite-cube
+      /       .fav-cube-name
+      / .cube-inline#fav-cube-4
+      /   .container-cube
+      /     .favorite-cube
+      /       .fav-cube-name
+      / .cube-inline#fav-cube-5
+      /   .container-cube
+      /     .favorite-cube
+      /       .fav-cube-name

@@ -1,0 +1,281 @@
+.page-sidebar.fixedscroll{:class => ('grid-sidebar' if action_name == 'cubes')} 
+  / MAIN MENU - START
+  #main-menu-wrapper.page-sidebar-wrapper
+    / USER INFO - START
+    / .profile-info.row
+    /   .profile-image.col-xs-4
+    /     %a{:href => "ui-profile.html"}
+    /       %img.img-responsive.img-circle{:alt => "", :src => "/assets/profile.jpg"}
+    /     .profile-details.col-xs-8
+    /       %h3
+    /         %a{:href => "ui-profile.html"} Shane Taylor
+    /         / Available statuses: online, idle, busy, away and offline
+    /         %span.profile-status.online
+    /       %p.profile-title Web Developer
+    /   / USER INFO - END
+    -if action_name == 'dashboard'
+      %ul.wraplist
+        / %li.menusection Main
+        %li.home{class: "#{open_link('users', 'dashboard')}"}
+          = link_to dashboard_path do
+            %i.fa.fa-dashboard
+            %span.title Dashboard
+        %li.cubes{class: "#{open_link('users', 'cubes')}"}
+          = link_to cubes_users_path do
+            %i.fa.fa-cube
+            %span.title Cubes
+        %li.profile{class: "#{open_link('users', 'profile')} #{open_link('users', 'edit')}"}
+          = link_to profile_users_path do
+            %i.fa.fa-user
+            %span.title Profile
+    -elsif action_name == 'cubes'
+      %ul.wraplist.top-align.text-right
+        %li.create
+          %a#new-project
+            %span.title CREATE NEW PROJECT
+        %li.find
+          = link_to cubes_users_path do
+            %span.title SEARCH PUBLISHED CUBES
+
+      %ul.wraplist.bottom-align.options.text-right
+        %li
+          %a.title.text-uppercase{style: 'color: #ec028c !important;'} Cube Name
+        %li
+          %a.visit-cube{href: "/accounts/cubes/asdfasdf"} ENTER CUBE
+        %li
+          %a.make-favorite FAVORITE
+        %li
+          %a.edit-name  EDIT CUBE
+        %li
+          %a.edit-questions  CUBE QUESTIONS  
+        %li
+          %a.remove-cube REMOVE
+        %li
+          %a.share-cube PUBLISH
+        %li
+          %a.close-menu  CLOSE
+    - else
+      %section.box.inverted
+        %header.panel_header.ui-sortable-handle
+          %h2.cube-name.title.title.pull-left
+            %i.fa.fa-spinner.rotating
+      %ul.nav.nav-tabs.transparent
+        %li.active
+          %button{"data-toggle" => "tab", :href => "#home-2"}
+            / %i.fa.fa-link
+            Links
+        %li
+          %button{"data-toggle" => "tab", :href => "#profile-2"}
+            / %i.fa.fa-user
+            Collaborators
+
+      .tab-content.transparent
+        #home-2.tab-pane.fade.in.active
+          #walls-holder.panel-group.primary{"aria-multiselectable" => "true", :role => "tablist"}
+            .panel.panel-default{"data-wall"=>4}
+              #headingOne2.panel-heading{:role => "tab"}
+                %h4.panel-title
+                  %a.wall-link.collapsed{"aria-controls" => "collapseTwo-1", "aria-expanded" => "false", "data-parent" => "#walls-holder", "data-toggle" => "collapse", :href => "#collapseTwo-1", "data-wall"=>4}
+                    / %i.fa.fa-chevron-circle-down
+                    %i.fa.fa-chevron-right
+                    %span.wall-name Yellow
+                    %span.demo-box{:style => "float: right; width: 10px; height: 10px; margin: 4px 0 0 10px; background: #ffc107; display: none;"}
+                %i.fa.fa-edit{"data-edit-wall"=>4}
+              #collapseTwo-1.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+                .panel-body
+                  %ul.wraplist.list-unstyled
+                    %li
+                      %a.add-new-link{"data-wall"=>4}
+                        %i.fa.fa-plus-circle
+                        Add content
+                      
+            .panel.panel-default{"data-wall"=>0}
+              #headingOne2.panel-heading{:role => "tab"}
+                %h4.panel-title
+                  %a.wall-link.collapsed{"aria-controls" => "collapseTwo-3", "aria-expanded" => "false", "data-parent" => "#walls-holder", "data-toggle" => "collapse", :href => "#collapseTwo-3", "data-wall"=>0}
+                    / %i.fa.fa-chevron-circle-down
+                    %i.fa.fa-chevron-right
+                    %span.wall-name Magenta
+                    %span.demo-box{:style => "float: right; width: 10px; height: 10px; margin: 4px 0 0 10px; background: #FF00FF;display: none;"}
+                %i.fa.fa-edit{"data-edit-wall"=>0}
+              #collapseTwo-3.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+                .panel-body
+                  %ul.wraplist.list-unstyled
+                    %li
+                      %a.add-new-link{"data-wall"=>0}
+                        %i.fa.fa-plus-circle
+                        Add content
+
+            .panel.panel-default{"data-wall"=>5}
+              #headingOne2.panel-heading{:role => "tab"}
+                %h4.panel-title
+                  %a.wall-link.collapsed{"aria-controls" => "collapseTwo-4", "aria-expanded" => "false", "data-parent" => "#walls-holder", "data-toggle" => "collapse", :href => "#collapseTwo-4", "data-wall"=>5}
+                    / %i.fa.fa-chevron-circle-down
+                    %i.fa.fa-chevron-right
+                    %span.wall-name Green
+                    %span.demo-box{:style => "float: right; width: 10px; height: 10px; margin: 4px 0 0 10px; background: #90EE90;display: none;"}
+                %i.fa.fa-edit{"data-edit-wall"=>5}
+              #collapseTwo-4.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+                .panel-body
+                  %ul.wraplist.list-unstyled
+                    %li
+                      %a.add-new-link{"data-wall"=>5}
+                        %i.fa.fa-plus-circle
+                        Add content
+          
+            .panel.panel-default{"data-wall"=>1}
+              #headingOne2.panel-heading{:role => "tab"}
+                %h4.panel-title
+                  %a.wall-link.collapsed{"aria-controls" => "collapseTwo-2", "aria-expanded" => "false", "data-parent" => "#walls-holder", "data-toggle" => "collapse", :href => "#collapseTwo-2", "data-wall"=>1}
+                    / %i.fa.fa-chevron-circle-down
+                    %i.fa.fa-chevron-right
+                    %span.wall-name Red
+                    %span.demo-box{:style => "float: right; width: 10px; height: 10px; margin: 4px 0 0 10px; background: #FF0000; display: none;"}
+                %i.fa.fa-edit{"data-edit-wall"=>1}
+              #collapseTwo-2.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+                .panel-body
+                  %ul.wraplist.list-unstyled
+                    %li
+                      %a.add-new-link{"data-wall"=>1}
+                        %i.fa.fa-plus-circle
+                        Add content
+          
+            .panel.panel-default{"data-wall"=>2}
+              #headingOne2.panel-heading{:role => "tab"}
+                %h4.panel-title
+                  %a.wall-link.collapsed{"aria-controls" => "collapseTwo-5", "aria-expanded" => "false", "data-parent" => "#walls-holder", "data-toggle" => "collapse", :href => "#collapseTwo-5", "data-wall"=>2}
+                    / %i.fa.fa-chevron-circle-down
+                    %i.fa.fa-chevron-right
+                    %span.wall-name Cyan
+                    %span.demo-box{:style => "float: right; width: 10px; height: 10px; margin: 4px 0 0 10px; background: #00FFFF; display: none;"}
+                %i.fa.fa-edit{"data-edit-wall"=>2}
+              #collapseTwo-5.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+                .panel-body
+                  %ul.wraplist.list-unstyled
+                    %li
+                      %a.add-new-link{"data-wall"=>2}
+                        %i.fa.fa-plus-circle
+                        Add content
+
+            .panel.panel-default{"data-wall"=>3}
+              #headingOne2.panel-heading{:role => "tab"}
+                %h4.panel-title
+                  %a.wall-link.collapsed{"aria-controls" => "collapseTwo-6", "aria-expanded" => "false", "data-parent" => "#walls-holder", "data-toggle" => "collapse", :href => "#collapseTwo-6", "data-wall"=>3}
+                    / %i.fa.fa-chevron-circle-down
+                    %i.fa.fa-chevron-right
+                    %span.wall-name Blue
+                    %span.demo-box{:style => "float: right; width: 10px; height: 10px; margin: 4px 0 0 10px; background: #0000FF; display: none;"}
+                %i.fa.fa-edit{"data-edit-wall"=>3}
+              #collapseTwo-6.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+                .panel-body
+                  %ul.wraplist.list-unstyled
+                    %li
+                      %a.add-new-link{"data-wall"=>3}
+                        %i.fa.fa-plus-circle
+                        Add content
+
+
+        #profile-2.tab-pane.fade
+          #collabs-holder.panel-group.primary{"aria-multiselectable" => "true", :role => "tablist"}
+            .panel.panel-default{"data-wall"=>4}
+              #headingOne2.panel-heading{:role => "tab"}
+                %h4.panel-title
+                  %a.collab-link.collapsed{"aria-controls" => "collapseTwo-1", "aria-expanded" => "false", "data-parent" => "#collabs-holder", "data-toggle" => "collapse", :href => "#collapseTwoCollab-1", "data-wall"=>4}
+                    / %i.fa.fa-chevron-circle-down
+                    %i.fa.fa-chevron-right
+                    %span.wall-name Yellow
+                    %span.demo-box{:style => "float: right; width: 10px; height: 10px; margin: 4px 0 0 10px; background: #ffc107;display: none;"}
+                %i.fa.fa-edit{"data-edit-wall"=>4}
+              #collapseTwoCollab-1.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+                .panel-body
+                  %ul.wraplist.list-unstyled
+                    %li
+                      %a.add-collab{"data-wall"=>4}
+                        %i.fa.fa-plus-circle
+                        Add More
+                      
+            .panel.panel-default{"data-wall"=>0}
+              #headingOne2.panel-heading{:role => "tab"}
+                %h4.panel-title
+                  %a.collab-link.collapsed{"aria-controls" => "collapseTwoCollab-3", "aria-expanded" => "false", "data-parent" => "#collabs-holder", "data-toggle" => "collapse", :href => "#collapseTwoCollab-3", "data-wall"=>0}
+                    / %i.fa.fa-chevron-circle-down
+                    %i.fa.fa-chevron-right
+                    %span.wall-name Magenta
+                    %span.demo-box{:style => "float: right; width: 10px; height: 10px; margin: 4px 0 0 10px; background: #FF00FF;display: none;"}
+                %i.fa.fa-edit{"data-edit-wall"=>0}
+              #collapseTwoCollab-3.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+                .panel-body
+                  %ul.wraplist.list-unstyled
+                    %li
+                      %a.add-collab{"data-wall"=>0}
+                        %i.fa.fa-plus-circle
+                        Add More
+
+            .panel.panel-default{"data-wall"=>5}
+              #headingOne2.panel-heading{:role => "tab"}
+                %h4.panel-title
+                  %a.collab-link.collapsed{"aria-controls" => "collapseTwoCollab-4", "aria-expanded" => "false", "data-parent" => "#collabs-holder", "data-toggle" => "collapse", :href => "#collapseTwoCollab-4", "data-wall"=>5}
+                    / %i.fa.fa-chevron-circle-down
+                    %i.fa.fa-chevron-right
+                    %span.wall-name Green
+                    %span.demo-box{:style => "float: right; width: 10px; height: 10px; margin: 4px 0 0 10px; background: #90EE90;display: none;"}
+                %i.fa.fa-edit{"data-edit-wall"=>5}
+              #collapseTwoCollab-4.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+                .panel-body
+                  %ul.wraplist.list-unstyled
+                    %li
+                      %a.add-collab{"data-wall"=>5}
+                        %i.fa.fa-plus-circle
+                        Add More
+          
+            .panel.panel-default{"data-wall"=>1}
+              #headingOne2.panel-heading{:role => "tab"}
+                %h4.panel-title
+                  %a.collab-link.collapsed{"aria-controls" => "collapseTwoCollab-2", "aria-expanded" => "false", "data-parent" => "#collabs-holder", "data-toggle" => "collapse", :href => "#collapseTwoCollab-2", "data-wall"=>1}
+                    / %i.fa.fa-chevron-circle-down
+                    %i.fa.fa-chevron-right
+                    %span.wall-name Red
+                    %span.demo-box{:style => "float: right; width: 10px; height: 10px; margin: 4px 0 0 10px; background: #FF0000;display: none;"}
+                %i.fa.fa-edit{"data-edit-wall"=>1}
+              #collapseTwoCollab-2.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+                .panel-body
+                  %ul.wraplist.list-unstyled
+                    %li
+                      %a.add-collab{"data-wall"=>1}
+                        %i.fa.fa-plus-circle
+                        Add More
+          
+            .panel.panel-default{"data-wall"=>2}
+              #headingOne2.panel-heading{:role => "tab"}
+                %h4.panel-title
+                  %a.collab-link.collapsed{"aria-controls" => "collapseTwoCollab-5", "aria-expanded" => "false", "data-parent" => "#collabs-holder", "data-toggle" => "collapse", :href => "#collapseTwoCollab-5", "data-wall"=>2}
+                    / %i.fa.fa-chevron-circle-down
+                    %i.fa.fa-chevron-right
+                    %span.wall-name Cyan
+                    %span.demo-box{:style => "float: right; width: 10px; height: 10px; margin: 4px 0 0 10px; background: #00FFFF;display: none;"}
+                %i.fa.fa-edit{"data-edit-wall"=>2}
+              #collapseTwoCollab-5.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+                .panel-body
+                  %ul.wraplist.list-unstyled
+                    %li
+                      %a.add-collab{"data-wall"=>2}
+                        %i.fa.fa-plus-circle
+                        Add More
+
+            .panel.panel-default{"data-wall"=>3}
+              #headingOne2.panel-heading{:role => "tab"}
+                %h4.panel-title
+                  %a.collab-link.collapsed{"aria-controls" => "collapseTwoCollab-5", "aria-expanded" => "false", "data-parent" => "#collabs-holder", "data-toggle" => "collapse", :href => "#collapseTwoCollab-6", "data-wall"=>3}
+                    / %i.fa.fa-chevron-circle-down
+                    %i.fa.fa-chevron-right
+                    %span.wall-name Blue
+                    %span.demo-box{:style => "float: right; width: 10px; height: 10px; margin: 4px 0 0 10px; background: #0000FF;display: none;"}
+                %i.fa.fa-edit{"data-edit-wall"=>3}
+              #collapseTwoCollab-6.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "headingTwo2", :role => "tabpanel", :style => "height: 0px;"}
+                .panel-body
+                  %ul.wraplist.list-unstyled
+                    %li
+                      %a.add-collab{"data-wall"=>3}
+                        %i.fa.fa-plus-circle
+                        Add More
+

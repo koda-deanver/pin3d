@@ -1,0 +1,170 @@
+= render 'layouts/includes/theme_selector'
+
+%section.wrapper.main-wrapper.row.edit-profile{:style => "margin-top: 0; padding: 0;"}
+  .col-lg-12
+    %section.nobox
+      .page-title
+        %h1.title.pull-left{style: 'color: white;'}
+          / PAGE HEADING TAG - START
+          Edit Profile
+        .actions.panel_actions.pull-right
+          = link_to profile_users_path, class: "btn btn-default" do
+            %i.fa.fa-arrow-circle-o-left
+            Back
+      .clearfix
+      .content-body.no-padding
+        .row
+          .col-sm-12.col-md-2.col-lg-2.sub-profile
+            %section.box.image
+              .uprofile-image#upload_image
+                .image
+              %p.text-center{:style => "color: #fff;cursor: pointer;"} Change Photo  
+              / %img.img-responsive{:alt => ""}/
+            .uprofile-name.edit.text-center
+              %h3.show-name
+                / Available statuses: online, idle, busy, away and offline
+                / %span.uprofile-status.online
+              %p.uprofile-title.show-occupation
+
+          .col-sm-12.col-md-5.col-lg-5.profile-details{style: "padding-right:0;"}
+            %form#edit_user{action: edit_profile_users_path}
+              %section.box
+                %header.panel_header
+                  %h2.title.pull-left Basic Info
+                  .actions.panel_actions.pull-right
+                    %a.box_toggle.fa.fa-chevron-down
+                .content-body
+                  .row
+                    .col-sm-12
+                      .form-group
+                        %label.form-label{for: "first_name"} First Name
+                        .controls
+                          %input#first_name.input-lg.form-control{:type => "text", required: true}/
+                          %span.help-block.hidden Error message here
+
+                    .col-sm-12
+                      / .form-group
+                      /   %label.form-label{for: "middle_name"} Middle Name
+                      /   .controls
+                      /     %input#middle_name.input-lg.form-control{:type => "text", required: true}/
+                      /     %span.help-block.hidden Error message here
+                      .form-group
+                        %label.form-label{for: "last_name"} Last Name
+                        .controls
+                          %input#last_name.input-lg.form-control{:type => "text", required: true}/
+                          %span.help-block.hidden Error message here
+
+                    .col-sm-12
+                      .form-group
+                        %label.form-label{for: "occupation"} Occupation
+                        .controls
+                          %input#occupation.input-lg.form-control{:type => "text"}/
+                          %span.help-block.hidden Error message here
+                    .col-sm-6
+                      .form-group#theme-select2
+                        %label.form-label{for: "country"} Country
+                        .controls
+                          %select#country.form-control.input-lg.m-bot15
+                            %option{value: ''} Select country
+                            - ISO3166::Country.countries.sort_by(&:name).each do |country|
+                              %option{value: country.name}= country.name
+
+                          %span.help-block.hidden Error message here
+
+                    / .col-sm-6
+                    /   .form-group
+                    /     %label.form-label{for: "identity"} Identity
+                    /     .controls
+                    /       %select#identity.form-control.input-lg.m-bot15
+                    /         %option{value: "", disabled: true, selected: true} Select Identity
+                    /         %option{value: "Male"} Male
+                    /         %option{value: "Female"} Female
+                    /       %span.help-block.hidden Error message here
+                    .col-sm-6
+                      .form-group
+                        %label.form-label{for: "phone"} Phone
+                        .controls
+                          %input#phone.input-lg.form-control{:type => "text", 'data-mask'=>'+(999) 999 999 999'}/
+                          %span.help-block.hidden Error message here
+
+                    .col-sm-12
+                      .form-group
+                        %label.form-label{for: "address"} Address
+                        .controls
+                          %input#address.input-lg.form-control{:type => "text"}/
+                          %span.help-block.hidden Error message here
+
+                      %input#image.hidden{type: "file", accept: "image/*"}
+
+              %section.box
+                %header.panel_header
+                  %h2.title.pull-left Other Info
+                  .actions.panel_actions.pull-right
+                    %a.box_toggle.fa.fa-chevron-up
+                .content-body.collapsed{style: 'display: none;'}
+                  .row
+                    .col-sm-12
+                      .form-group
+                        %label.form-label{for: "age_group"} Age Group
+                        .controls
+                          %select#age_group.form-control.input-lg.m-bot15
+                            %option{value: "", disabled: true, selected: true} Select Age Group
+                            %option{value: "Youth"} Youth
+                            %option{value: "Adult"} Adult
+                            %option{value: "Senior Citizen"} Senior Citizen
+                          %span.help-block.hidden Error message here
+
+                    .col-sm-6
+                      .form-group
+                        %label.form-label{for: "favorite_color"} Favorite Color
+                        .controls
+                          %input#favorite_color.input-lg.form-control{:type => "text"}/
+                          %span.help-block.hidden Error message here
+                    .col-sm-6
+                      .form-group
+                        %label.form-label{for: "favorite_genre"} Favorite Genre
+                        .controls
+                          %input#favorite_genre.input-lg.form-control{:type => "text"}/
+                          %span.help-block.hidden Error message here
+
+                    .col-sm-12
+                      .form-group
+                        %label.form-label{for: "gamer_tag"} Gamer Tag
+                        .controls
+                          %input#gamer_tag.input-lg.form-control{:type => "text"}/
+                          %span.help-block.hidden Error message here
+
+                      .form-group                      
+                        %label.form-label{for: "bio"} About Me
+                        .controls
+                          %textarea#bio.input-lg.form-control
+                          %span.help-block.hidden Error message here
+              %input.btn.btn-primary.btn-block{type: "Submit", value: "Update"}
+              .clearfix 
+
+          .col-sm-12.col-md-5.col-lg-5.profile-questions
+            %section#questions-holder.box
+              %header.panel_header
+                %h2.title.pull-left Questions
+                .actions.panel_actions.pull-right
+                  %a.box_toggle.fa.fa-chevron-down
+              .content-body
+                .row
+                  .col-sm-12.select-questions
+                    .form-group
+                      %label.form-label Profile Questions
+                      .input-group
+                        %span.input-group-addon
+                          %i.fa.fa-question-circle
+                        %input#questions.form-control{:placeholder => "Type for Questions", :type => "text"}/
+
+                    .choices
+                    
+                    .btn-group.btn-group-justified.answer-buttons{style: 'display: none;'}
+                      %a.btn.btn-secondary{:type => "button"} Add
+                      %a.btn.btn-red{:type => "button"} Cancel
+
+            .selected-questions
+
+
+

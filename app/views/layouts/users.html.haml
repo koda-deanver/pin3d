@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %meta{:content => "reload", :name => "turbolinks-visit-control"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title SindyCUBEs
+    = csrf_meta_tags
+    / - if controller.action_name != 'cube' && controller.action_name != 'room'
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
+    / = javascript_include_tag 'users/' + controller_name, media: 'all', 'data-turbolinks-track': false
+    = stylesheet_link_tag     controller_name, media: 'all', 'data-turbolinks-track': "reload"
+    
+    = render 'layouts/includes/header_includes'
+  %body
+    .bg-overlay
+    - if (controller.action_name != 'cube' && controller.action_name != 'room')
+      = render "layouts/header"
+    .page-container.row-fluid.container-fluid
+      - if controller.action_name == 'cubes' || controller_name == 'rooms'
+        = render "layouts/sidebar"
+      = yield
+
+      / = render 'layouts/footer'
+    .page-bottom
+      = render 'layouts/includes/bottom_includes'
+    = render 'layouts/modals/friend_requests'

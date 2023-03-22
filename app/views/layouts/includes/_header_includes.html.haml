@@ -1,0 +1,35 @@
+
+= stylesheet_link_tag "users/responsive", 'data-turbolinks-track': "reload"
+= stylesheet_link_tag "users/style", 'data-turbolinks-track': "reload"
+/ = stylesheet_link_tag "responsive", 'data-turbolinks-track': "reload"
+
+-if controller_name == 'rooms'
+  = stylesheet_link_tag "users/bootstrap-tagsinput.css", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "users/typeahead", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "users", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "users/messenger.css", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "users/messenger-theme-future.css", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "users/animate.min.css", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "users/messenger-theme-flat.css", 'data-turbolinks-track': "reload"
+
+
+-if controller_name == 'users' && action_name == "cubes"
+  = stylesheet_link_tag "users", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "cubes/cubes", 'data-turbolinks-track': "reload"
+
+
+-if controller_name == "sessions"
+  = stylesheet_link_tag "https://www.gstatic.com/firebasejs/ui/4.2.0/firebase-ui-auth.css", 'data-turbolinks-track': "reload"
+
+-if controller_name == 'registrations' || (controller_name == 'users' && action_name == "edit") || action_name == 'home'
+  = stylesheet_link_tag "users/select2.css", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "https://www.gstatic.com/firebasejs/ui/4.2.0/firebase-ui-auth.css", 'data-turbolinks-track': "reload"
+
+-if controller_name == 'users'
+  = stylesheet_link_tag "users/bootstrap-tagsinput.css", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "users/typeahead", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "users/icheck/skins/all", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "users/messenger.css", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "users/messenger-theme-future.css", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "users/animate.min.css", 'data-turbolinks-track': "reload"
+  = stylesheet_link_tag "users/messenger-theme-flat.css", 'data-turbolinks-track': "reload"

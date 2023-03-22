@@ -1,0 +1,95 @@
+.page-topbar
+  .logo-area
+    %a{href: "/"}
+      = image_tag(image_path('sindycubes_square_logo'))
+    / = image_tag(image_path('pin3dlogo'))
+    / %a{href: "/"}
+    /   = image_tag(image_path('sindylogo'))
+    / %a{href: "http://www.collab101.org/home-page-dashboard"}
+    /   = image_tag(image_path('k-logo'))
+    / %a{href: "http://www.xrportfolio.space/"}
+    /   = image_tag(image_path('colla-xr-logo'))
+    / %a{href: "https://www.seamlessintegrateddynamics.com/pincube-app-splash"}
+    /   = image_tag(image_path('3check-logo'))
+    / %a{href: "https://www.harknessiroom.com/"}
+    /   = image_tag(image_path('infinity-logo'))
+    / %a{href: "https://www.harknessiroom.com/"}
+    /   = image_tag(image_path('harkn-logo'))
+    / PIN
+    / %sup{style: "left: -0.3em;margin-right: -0.5em;"}3
+  .quick-area
+    .pull-left
+      %ul.info-menu.left-links.list-inline.list-unstyled
+        - if controller.action_name != 'home'
+          / %li.sidebar-toggle-wrap
+          /   %a.sidebar_toggle{"data-toggle" => "sidebar", :href => "#"}
+          /     %i.fa.fa-bars
+
+          %li.notify-toggle-wrapper#all-notifs{style: "display:none;"}
+            %a.toggle{"data-toggle" => "dropdown", :href => "#", 'aria-expanded'=>"true"}
+              %i.fa.fa-bell
+              %span.badge.badge-accent#tot-notif-count.tot-notif-count 0
+            %ul.dropdown-menu.notifications.animated.fadeIn
+              %li.total
+                %span.small
+                  You have
+                  %strong.tot-notif-count 0
+                  new notifications.
+                  / %a.pull-right{:href => "javascript:;"} Mark all as Read
+              %li.list
+                / {style: "height: 80px;"}
+                %ul.dropdown-menu-list.list-unstyled.ps-scrollbar
+                  %li.unread.offline.coll-requests{style: "display:none;"}
+                    / available: success, warning, info, error
+                    %a{"data-toggle" => "modal", :href => "#cmpltadminModal-7"}
+                      .notice-icon
+                        %i.fa.fa-user
+                      %div
+                        %span.name{style: 'padding-top: 7px;'}
+                          %strong Collaboration Requests
+
+              %li.external
+                %a{:href => "javascript:;"}
+                  %span All Notifications
+
+
+
+
+    - home_class = action_name == 'home' ? 'un-auth' : ''
+    .pull-right
+      %ul.info-menu.right-links.list-inline.list-unstyled{class: "#{home_class}"}
+        -if action_name == "profile"
+          %li.logout.showopacity{style: 'display: none;'}
+            = link_to('FIND COLLABORATOR', nil, style: 'color: white;text-decoration: none;')
+
+        -if action_name == "cubes" || (action_name == "dashboard" || action_name == "user" ) || (action_name == "show" && controller_name == "users") || action_name == "edit" || action_name == "first_room" || action_name == "home"
+          %li.logout.showopacity{style: 'display: none;'}
+            
+            / = link_to('PROFILE', profile_users_path, action: 'replace', style: 'color: white;text-decoration: none;')
+
+            -url_origin = if Rails.env == "production"
+              -'https://portfolio.sindyxr.com'
+            -else
+              -'http://localhost:3000'
+
+            = link_to('PROFILE', "#{url_origin}/users/register/profile/dashboard", action: 'replace', style: 'color: white;text-decoration: none;')
+        -if action_name != "home"
+          %li.logout.showopacity{style: 'display: none;'}
+            %a#theme{href:'', style: 'color: white;text-decoration: none;'} THEME
+        
+        / -if action_name == "profile" || (action_name == "dashboard" || action_name == "user" ) || (action_name == "show" && controller_name == "users")|| action_name == "edit" || action_name == "home"
+        %li.logout.showopacity{style: 'display: none;'}
+          = link_to('GRID', cubes_users_path, id: "", style: 'color: white;text-decoration: none;')
+            
+        %li.logout.showopacity{style: 'display: none;'}
+          = link_to('HELP', nil, id: "", style: 'color: white;text-decoration: none;')
+
+        %li.logout.showopacity{style: 'display: none;'}
+          = link_to('LOG OUT', nil, id: "logout_user", style: 'color: white;text-decoration: none;')
+        / %li.sign-in.showopacity{style: 'display: none;'}
+        /   = link_to('Sign In', users_sign_in_path, style: 'color: white;text-decoration: none;')
+        / %li.separator
+        %li.register.showopacity{style: 'display: none;'}
+          = link_to('SIGN IN', users_sign_in_path, style: 'color: white;text-decoration: none;font-size: 13px;')
+        %li#signup.register.showopacity{style: 'display: none;'}
+          = link_to('SIGN UP', '#section-2-b', style: 'color: white;text-decoration: none;font-size: 13px;')

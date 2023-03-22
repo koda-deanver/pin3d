@@ -1,0 +1,9 @@
+%a-scene{timeout: 10000}
+  %a-assets
+    %video#video{:autoplay => "", :crossorigin => "anonymous", :loop => "true", :name => 'media'}
+      %source{:src => asset_path('frames/city.mp4')}
+  %a-videosphere{:rotation => "0 180 0", :src => "#video"}
+
+
+
+

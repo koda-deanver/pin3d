@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title SindyCUBEs
+    / = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    / = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    / = render 'layouts/includes/header_includes'
+    = csrf_meta_tags
+
+    = javascript_include_tag "https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js", media: 'all'
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': true
+    = javascript_include_tag 'application', 'data-turbolinks-track'=> true
+    = javascript_include_tag 'https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js'
+    = javascript_include_tag 'users/' + controller_name, media: 'all', 'data-turbolinks-track': true
+    = stylesheet_link_tag    'users/' + controller_name, media: 'all', 'data-turbolinks-track': true
+    = render 'layouts/includes/header_includes'
+  %body
+    = yield
+    = render 'layouts/includes/bottom_includes'

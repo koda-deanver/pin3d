@@ -1,0 +1,375 @@
+// Place all the styles related to the users/rooms controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
+
+#emoji-row {
+  width: 104px;
+  position: absolute;
+  z-index: 1001;
+  top: 102px;
+  left: 400px;
+  background-color: white;
+  /*border-top-right-radius: 9px;*/
+
+  .col-sm-12 {
+    padding: 0 0 0;
+    position: relative;
+
+    .fa-caret-up {
+      position: absolute;
+      font-size: 25px;
+      color: white;
+      left: 5px;
+      top: -16px;
+    }
+
+    .fa-times-circle {
+      font-size: 18px;
+      position: absolute;
+      top: 4px;
+      right: 3px;
+      color: #ff5f74;
+      border-radius: 50%;
+      line-height: 14px;
+      width: 15px;
+
+      &:hover {
+        color: red;
+        cursor: pointer;
+      }
+    }
+
+    .col-sm-6 {
+      padding: 5px;
+        position: relative;
+
+      img {
+        position: relative;
+        width: 80%;
+        display: block;
+        margin: auto;
+
+        &:hover {
+          opacity: 0.8;
+          -moz-opacity: 0.8;  
+          filter:alpha(opacity=80);
+          cursor: pointer;
+        }
+      }
+
+      &:nth-child(odd) {
+        padding-right: 2.5px;
+      }
+
+      &:nth-child(even) {
+        padding-left: 2.5px;
+      }
+    }
+  }
+}
+
+#walls-holder, #collabs-holder {
+  margin-top: 5px;
+
+  .panel-default {
+    background-color: transparent;
+    border-color: transparent;
+
+    .panel-heading {
+      position: relative;
+      background-color: transparent;
+      border-color: transparent;
+
+      h4 {
+        width: 230px;
+        a {
+          background-color: transparent;
+          border-color: transparent;
+
+          i {
+            min-width: 14px;
+          }
+        }
+      }
+
+      i.fa-edit {
+        position: absolute;
+        top: 17px;
+        right: 15px;
+        display: none;
+
+        &:hover {
+          color: #c1e917;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .panel-body {
+      border-top-color: rgba(0,0,0,0.05);
+      color: white;
+
+      ul {
+        margin-top: 0;
+      }
+
+      a {
+        padding: 0 5px !important;
+        overflow-x: hidden;
+
+        i {
+          width: 10px;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+#collabs-holder, #walls-holder {
+  .panel-body ul {
+    li {
+      position: relative;
+
+      a.owned-cube {
+        margin-right: 23px;
+        &:hover + .remove-collab, &:hover + .remove-link {
+          background-color: #243646;
+          color: #f44336;
+        }
+      }
+
+      a {
+        span .fa {
+          color: #23394B;
+          width: 14px;
+        }
+      }
+
+      i.remove-collab {
+        margin: 0;
+        font-size: 20px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 8px 4px;
+
+        &:hover {
+          background-color: #f44336;
+          color: white;
+        }
+      }
+
+      i.remove-link {
+        margin: 0;
+        font-size: 15px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 10px 6px;
+
+        &:hover {
+          background-color: #f44336;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+#links-row {
+  position: absolute;
+  bottom: 15px;
+
+  .link {
+    padding-top: 100%;
+    position: relative;
+    background-color: #23394B;
+  }
+}
+
+body { margin: 0; }
+canvas { width: 100%; height: 100%; }
+
+.container-fluid {
+  padding: 0 !important;
+}
+
+.main-wrapper.bg-floater {
+  
+}
+
+#interior_cube {
+  position: relative;
+}
+
+#loader {
+  display: none;
+  background-color: #e5eff1;
+  height: 100%;
+  z-index: 9999999999999999999;
+  .loader-holder {
+    height: 100%;
+    padding-top: 15%;
+    padding-bottom: 15%;
+    transition: 1s;
+    img {
+      display: block;
+      margin: auto;
+    }
+  }
+  .play {
+    height: 100%;
+  }
+}
+
+.info {
+  padding: 14px 0 14px;
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  p {
+    margin-bottom: 0;
+    text-align: center;
+    color: black;
+    font-family: sans-serif;
+    b {
+      color: #334d4a;
+    }
+  }
+  .desktop-logout {
+    position: absolute;
+    top: 24px;
+    right: 22px;
+  }
+}
+
+#log-out-holder {
+  display: none;
+  position: fixed;
+  bottom: 14px;
+  left: 22px;
+}
+
+#main-menu-wrapper {
+  section.box.inverted {
+    margin: 0;
+    position: fixed;
+    z-index: 100;
+    width: 260px;
+
+    .title {
+      padding-left: 15px;
+      padding-top: 0;
+      font-size: 16px;
+    }
+
+    header {
+      min-height: 55px !important;
+      border-bottom-color: black;
+    }
+  }
+
+@-webkit-keyframes rotating {
+  from{
+      -webkit-transform: rotate(0deg);
+  }
+  to{
+      -webkit-transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  -webkit-animation: rotating 2s linear infinite;
+}
+
+  ul.nav.nav-tabs.transparent {
+    margin-top: 55px;
+    position: fixed;
+    z-index: 100;
+    width: 260px;
+    border: 0;
+
+    li {
+      width: 50%;
+      border: 0 !important;
+
+      button {
+        padding: 10px 0;
+        background-color: transparent;
+        color: white;
+        width: 100%;
+        background-color: #324d65;
+        border: 0 !important;
+
+        &:hover, &:focus {
+          outline: none;
+          background-color: rgba(33, 33, 33, 0.1)
+        }
+      }
+
+      &.active > button {
+        background-color: #24394b !important;
+      }
+    }
+  }
+
+  .tab-content {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    margin-top: 98px;
+  }
+
+  .cube-collabs {
+    margin-top: 0 !important;
+    li {
+      padding: 15px 15px 0;
+
+      a {
+        padding-left: 5px !important;
+        overflow-x: hidden;
+
+        i {
+          width: 10px;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+
+/**#walls-holder {
+  display: none;
+  position: fixed;
+  bottom: 15px;
+  right: 22px;
+  width: 215px;
+  #txt-link {
+    width: 100%;
+    border: solid 2px;
+    border-radius: 5px;
+    height: 25px;
+    padding: 3px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    outline: none !important;
+    outline-width: 6px s;
+    border-radius: 5px;
+    box-shadow: 0 0 10px white;
+    border: solid 2px white;
+  }
+  #txt-link:focus {
+    outline: none !important;
+    outline-width: 6px s;
+    border-radius: 5px;
+    box-shadow: 0 0 10px white;
+    border: solid 2px white;
+  }
+}**/

@@ -1,0 +1,495 @@
+
+var allowRedirect = true;
+
+function loadLinkRecord(userId){
+  firebase.database().ref("Links/" + userId).child().orderByValue('created').once('value')
+  .then(function(snapshot){
+    $.each(snapshot.val(), function(key, value){
+      fetchLinkDetails(value.url, value.wall, function(){
+      });
+    });
+    disableChangeFace = false;
+  });
+}
+
+function addLinkToRecord(linkDetails, id) {
+  var user = firebase.auth().currentUser,
+      linkId, refLinks;
+  if(user) {
+    linkId    = firebase.database().ref().child('Links/' + id).push().key;
+    refLinks  = firebase.database().ref('Links/' + id + '/' + linkId);
+    $.extend(linkDetails, {key: linkId})
+    refLinks.update(linkDetails);
+  }
+  return linkId;
+}
+
+function addFileToRecord(linkDetails, cube_id, link_id) {
+  var user = firebase.auth().currentUser,
+      refLinks;
+  if(user) {
+    // linkId    = firebase.database().ref().child('Links/' + cube_id).push().key;
+    refLinks  = firebase.database().ref('Links/' + cube_id + '/' + link_id);
+    $.extend(linkDetails, {key: link_id})
+    refLinks.update(linkDetails);
+  }
+}
+
+function collabFavorite(cube_id, user_id){
+  var favorite = 0;
+  var user = firebase.auth().currentUser;
+  firebase.database().ref(["CubeCollaborators", cube_id, user.uid].join('/'))
+  .once('value', function(snapshot) {
+    var collab_cube = snapshot.val();
+    favorite = collab_cube.favorite ;
+    var user = firebase.auth().currentUser;
+  });
+  return favorite;  
+}
+
+function addCube(cubeDetails) {
+  var genre = undefined, bgImg = undefined;
+  var user = firebase.auth().currentUser;
+  var hue  = cubeDetails.hue,
+      lightness = cubeDetails.lightness,
+      saturation = cubeDetails.saturation;
+      
+  if(user) {
+    var cubeId = firebase.database().ref('Cubes/' + user.uid).push().key;
+
+    if (hue == 0.83 && lightness == 0.5){
+      genre = 'live';
+      bgImg = '/assets/users/light.png';
+    }
+    else if (hue == 0.16 && lightness == 0.5){
+      genre = 'lensed';
+      bgImg = '/assets/users/theme-10.jpeg';
+    }
+    else if (hue == 0.5 && lightness == 0.5){
+      genre = 'real';
+      bgImg = '/assets/users/theme-12.jpeg';
+    }
+    else if (hue == 0.67 && lightness == 0.5){
+      genre = 'publish';
+      bgImg = '/assets/users/theme-11.jpeg';
+    }
+    else if (hue == 0 && lightness == 0.5 && saturation == 1){
+      genre = 'sell';
+      bgImg = '/assets/users/theme-13.jpeg';
+    }
+    else if (hue == 0.33 && lightness == 0.25){
+      genre = 'food';
+      bgImg = '/assets/users/theme-09.jpeg';
+    }
+    else if (hue == 0 && lightness == 0.5 && saturation == 0){
+      genre = 'custom';
+      bgImg = '';
+    }
+
+    $.extend(cubeDetails, {
+      bgImg: bgImg,
+      url: window.location.origin + "/accounts/cubes/" + cubeId
+    });
+
+    // console.log(cubeDetails)
+
+    firebase.database().ref(['Cubes', user.uid, cubeId].join('/')).set(cubeDetails);
+    var hashTag = cubeDetails["description"].match(/#\S+/g);
+    
+    $.each(hashTag, function(index, value){
+      value = value.slice(1);
+      firebase.database().ref('HashTags/' + value + '/' + cubeId).set({user_id: user.uid, cube_name: cubeDetails.name, genre: genre});
+    });
+    return cubeId;
+  }
+}
+
+function myFunction() {
+  // body...
+}
+
+function updateCube(value, id) {
+  setTimeout(function() {
+    var user = firebase.auth().currentUser;
+    if(user) {
+      if (value["description"] != undefined){
+        firebase.database().ref('HashTags').once('value', function(snap) {
+          $.each(snap.val(), function(cub, val) {
+            $.each(val, function(cube, value) {
+              if(cube == id)
+              {
+                firebase.database().ref(['HashTags', cub, id].join('/')).remove();
+              }
+            });
+          });
+        });    
+      }
+      is_collab = isCubeCollab(id);
+      if(is_collab){
+        var upd8Cube = firebase.database().ref(
+          ['CubeCollaborators', id, user.uid].join('/')
+        );
+
+        upd8Cube.update(value);
+      }
+      else
+      {
+        var upd8Cube = firebase.database().ref(
+          ['Cubes', user.uid, id].join('/')
+        );
+
+        upd8Cube.update(value);
+        if (value["description"] != undefined){
+          var genre = 0;
+          var hue  = value.hue,
+              lightness = value.lightness,
+              saturation = value.saturation;
+
+          if (hue == 0.83 && lightness == 0.5){
+            genre = 'live';
+          }
+          else if (hue == 0.16 && lightness == 0.5){
+            genre = 'lensed';
+          }
+          else if (hue == 0.5 && lightness == 0.5){
+            genre = 'real';
+          }
+          else if (hue == 0.67 && lightness == 0.5){
+            genre = 'publish';
+          }
+          else if (hue == 0 && lightness == 0.5 && saturation == 1){
+            genre = 'sell';
+          }
+          else if (hue == 0.33 && lightness == 0.25){
+            genre = 'food';
+          }
+          else if (hue == 0 && lightness == 0.5 && saturation == 0){
+            genre = 'custom';
+          }
+          else {}    
+          firebase.database().ref('HashTags').once('value', function(snap) {
+            $.each(snap.val(), function(cub, val) {
+              $.each(val, function(cube, value) {
+                if(cube == id)
+                {
+                  firebase.database().ref(['HashTags', cub, id].join('/')).remove();
+                }
+              });
+            });
+          }).then(function(){ 
+            var hashTag = value["description"].match(/#\S+/g);
+            $.each(hashTag, function(index, val){
+              val = val.slice(1);
+              firebase.database().ref('HashTags/' + val + '/' + id).set({user_id: user.uid, cube_name: value.name,genre: genre});
+            });
+          });
+        }
+      }
+    }
+  }, Math.floor( 100 + Math.random() * 500 ));
+}
+
+function removeCube(id) {
+  var user = firebase.auth().currentUser;
+  if(user) {
+    var remLinks = firebase.database().ref(['Links', id].join('/'));
+    remLinks.remove();
+
+    var remReqs = firebase.database().ref(['CubeReq', id].join('/'));
+    remReqs.remove();
+
+    firebase.database().ref('HashTags').once('value', function(snap) {
+      $.each(snap.val(), function(cub, val) {
+        $.each(val, function(cube, value) {
+          if(cube == id)
+          {
+            firebase.database().ref(['HashTags', cub, id].join('/')).remove();
+          }
+        });
+      });
+    });
+
+    var remCollabs = firebase.database().ref(['CubeCollaborators', id].join('/'));
+    remCollabs.remove();
+
+    var remAccepted = firebase.database().ref(['CubeAccepted', user.uid, id].join('/'));
+    remAccepted.remove();
+
+    var accepted_notif = $('.accepted-request[data-cube-id="' + id + '"]');
+
+    var remCube = firebase.database().ref(['Cubes', user.uid, id].join('/'));
+    remCube.remove().then(function(){
+      var remCube = firebase.database().ref(['Cubes', user.uid, id].join('/'));
+      remCube.remove()
+    });
+
+    if(accepted_notif.length) {
+      var notif       = $('.notify-toggle-wrapper').find('.tot-notif-count');
+      var notif_count = parseInt(notif.html());
+
+      $('.messenger-close').trigger('click');
+      accepted_notif.remove();
+
+      if(notif_count > 0) {
+        notif_count--;
+        notif.html(notif_count);
+      }
+
+      if(notif_count < 1) {
+        $('.notify-toggle-wrapper').hide();
+      }
+    }
+  }
+}
+
+function updateLinkToRecord(linkDetails, id, postKey) {
+  try {
+    var user = firebase.auth().currentUser;
+    if(user) {
+      var referLink  = firebase.database().ref(['Links',id,postKey].join('/'));
+      referLink.update(linkDetails);
+    }
+  } catch(err) {
+    alert(err);
+  }
+}
+
+function editWallName(details, id, owner) {
+
+  if(!owner) owner = firebase.auth().currentUser.uid;
+
+  var refLink  = firebase.database().ref(['Cubes',owner , id,'wallNames'].join('/'));
+  refLink.update(details);
+}
+
+function update_uuid_cube_req(uid, email){  
+  var temp_data = {};
+  var url = "/accounts/cubes";
+  if(sessionStorage.getItem("cube_redirect")){
+    url =  window.location.origin + sessionStorage.getItem("cube_redirect");
+    sessionStorage.removeItem("cube_redirect")
+  }
+  var key_email = email.replace(/[^a-zA-Z0-9]/g,'_');
+  firebase.database().ref('CubeReq').once('value', function(snap) {
+    $.each(snap.val(), function(cube, val) {
+      if(cube == 'useridA') return;
+      $.each(val, function(receiver, sender) {
+        if (receiver != key_email) return;
+        temp_data[cube] = sender
+      });
+    });
+  }); 
+
+  if (!jQuery.isEmptyObject(temp_data)) {
+    var success = false
+    $.each(temp_data, function(cube_id, val){
+      firebase.database().ref(['CubeReq', cube_id, key_email].join('/')).remove(function(){
+        firebase.database().ref(['CubeReq', cube_id, uid].join('/')).update(val, function(){
+          window.location.href = url;
+        });
+      }).catch(function(error) {
+        alert("something went wrong!");
+      });
+    });
+  }
+  else{
+    window.location.href = url;
+  }
+}
+
+function validateEmail(email) {
+  var eValidation = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return eValidation.test(email);
+}
+
+function validatePhone(phone) {
+  var eValidation = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return eValidation.test(email);
+}
+
+function hasErrorField(feild, msg) {
+  feild.addClass('form-control-danger');
+  feild.parent('div').addClass('has-danger');
+  if(msg !== "")
+    controlFeedback(feild.parent('div'), msg);
+}
+
+function controlFeedback(controlElem, msg) {
+  if (!controlElem.children("small").is(':visible')) {
+    controlElem.append('<small class="form-text text-danger font-italic">' +
+      msg +
+      '</small>'
+    );
+  } else {
+    controlElem.children("small").html(msg);
+  }
+}
+
+function inValidSignin(formCont) {
+  if(!formCont.children('.alert.alert-danger').is(':visible'))
+    formCont.prepend(
+      '<div class="alert alert-danger" role="alert">' +
+        '<strong>Invalid email or password!</strong>' +
+      '</div>'
+    );
+}
+
+function inValidWithMsg(formCont, msg) {
+  if(!formCont.children('.alert.alert-danger').is(':visible'))
+    formCont.prepend(
+      '<div class="alert alert-danger" role="alert">' +
+        '<strong>' + msg + '</strong>' +
+      '</div>'
+    );
+}
+
+function resetPass(formCont) {
+  if(!formCont.children('.alert.alert-success').is(':visible'))
+    formCont.prepend(
+      '<div class="alert alert-success" role="alert">' +
+        '<strong>An email has been sent to reset your password!</strong>' +
+      '</div>'
+    );
+}
+
+function inValidAuth(formCont, msg) {
+  if(!formCont.children('.alert.alert-danger').is(':visible'))
+    formCont.prepend(
+      '<div class="alert alert-danger" role="alert">' +
+        '<strong>' + msg + '</strong>' +
+      '</div>'
+    );
+}
+
+function unErrorFeild(field) {
+  field.removeClass('form-control-danger');
+  field.parent('div').removeClass('has-danger');
+  field.parent('div').children('small').remove();
+}
+
+function authExtender(provider, value) {
+  return {
+    bgImg       : '',
+    twitterId   : provider.toLowerCase() == 'twitter'       ? value : '',
+    facebookId  : provider.toLowerCase() == 'facebook.com'  ? value : '',
+    googleId    : provider.toLowerCase() == 'google.com'    ? value : '',
+    snapchatId  : provider.toLowerCase() == 'snapchat'      ? value : '',
+    linkinId    : provider.toLowerCase() == 'linkin'        ? value : ''
+  };
+}
+
+function defaultExtraFields() {
+  return {
+    'age-group'       : "",
+    'favorite-color'  : "",
+    'favorite-genre'  : "",
+    occupation        : ""
+  };
+}
+
+function phoneUiConfig() {
+  return {
+    signInSuccessUrl: window.location.origin + '/accounts/cubes',
+    callbacks: {
+      // Called when the user has been successfully signed in.
+      signInSuccessWithAuthResult: function(result, redirectUrl) {
+        // handleSignedInUser(user);
+        // Do not redirect.
+
+        $("#phone-popup").modal('hide')
+        console.log(result)
+
+        var token     = result.credential ? result.credential.accessToken : null,
+            user      = result.user,
+            provider  = result.additionalUserInfo.providerId
+            // profInfo  = result.additionalUserInfo.profile;
+
+        firebase.database().ref('Users/' + user.uid).once('value').then(function(snapshot) {
+          var redirectUrl = window.location.origin + '/accounts/cubes';
+
+          if(sessionStorage.getItem("cube_redirect")){
+            redirectUrl =  window.location.origin + sessionStorage.getItem("cube_redirect");
+            sessionStorage.removeItem("cube_redirect")
+          }
+
+          if(!snapshot.val()) {
+            var profile = {
+              bio         : "",
+              email       : "",
+              firstname   : "",
+              lastname    : "",
+              'gamer-tag' : "",
+              country     : "",
+              address     : "",
+              phone       : "",
+              image       : user.photoURL ? user.photoURL : '',
+              status      : 'online'
+            };
+
+            profile = $.extend(profile, authExtender(provider, provider));
+            profile = $.extend(profile, {userId: user.uid});
+            profile = $.extend(profile, defaultExtraFields());
+
+            var addUser = firebase.database().ref(["Users", user.uid].join('/'));
+            addUser.set(profile, function() {
+              update_uuid_cube_req(user.uid, user.phoneNumber);
+              // window.location.href = redirectUrl;
+            });
+          } else {
+            var usr         = snapshot.val(),
+                updateUser  = firebase.database().ref(["Users", user.uid].join('/'));
+            updateUser.update({
+              bio         : usr.bio,
+              email       : usr.email,
+              firstname   : usr.firstname,
+              lastname    : usr.lastname,
+              'gamer-tag' : usr['gamer-tag'],
+              country     : usr.country,
+              address     : usr.address,
+              phone       : user.phoneNumber,
+              image       : user.photoURL ? user.photoURL : '',
+              status      : 'online'
+            }, function() {
+              window.location.href = redirectUrl;
+            });
+          }
+        });
+        // return false;
+      }
+    },
+    signInFlow: "popup",
+    signInOptions: [
+      firebase.auth.PhoneAuthProvider.PROVIDER_ID
+    ],
+    // tosUrl and privacyPolicyUrl accept either url string or a callback
+    // function.
+    // Terms of service url/callback.
+    tosUrl: 'https://www.seamlessintegrateddynamics.com/products',
+    // Privacy policy url/callback.
+    privacyPolicyUrl: 'https://www.seamlessintegrateddynamics.com/privacy-policy'
+  };
+}
+
+function hasChild(childElem) {
+  return $(document).has(childElem).length > 0;
+}
+
+(function(){
+  firebase.initializeApp({
+    apiKey:             "<%= APP_CONFIG['key'] %>",
+    authDomain:         "<%= APP_CONFIG['authDomain'] %>",
+    databaseURL:        "<%= APP_CONFIG['databaseURL'] %>",
+    projectId:          "<%= APP_CONFIG['projectId'] %>",
+    storageBucket:      "<%= APP_CONFIG['storageBucket'] %>",
+    messagingSenderId:  "<%= APP_CONFIG['messagingSenderId'] %>",
+    appID:               "<%= APP_CONFIG['appId'] %>"
+  });
+
+  var functions = firebase.functions();
+  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+  if(window.location.pathname == "/" || window.location.pathname == "/accounts/sign_in")
+    ui.start('#phone-popup .modal-body', phoneUiConfig());
+}());
+
+

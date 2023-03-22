@@ -1,0 +1,90 @@
+= javascript_include_tag "jquery", 'data-turbolinks-track': "reload"
+= javascript_include_tag "cubes/jquery-ui.min", 'data-turbolinks-track': "reload"
+= javascript_include_tag "users/bootstrap", 'data-turbolinks-track': "reload"
+= javascript_include_tag "users/jquery.easing.min", 'data-turbolinks-track': "reload"
+= javascript_include_tag "users/form-validation", 'data-turbolinks-track': "reload"
+= javascript_include_tag "users/pace.min", 'data-turbolinks-track': "reload"
+= javascript_include_tag "users/perfect-scrollbar", 'data-turbolinks-track': "reload"
+= javascript_include_tag "users/perfect-scrollbar.min", 'data-turbolinks-track': "reload"
+= javascript_include_tag "users/viewportchecker", 'data-turbolinks-track': "reload"
+= javascript_include_tag "users/zscripts", 'data-turbolinks-track': "reload"
+
+
+-if controller_name == 'rooms'
+  = javascript_include_tag "users/icheck/icheck.min", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/bootstrap-tagsinput", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/typeahead.bundle", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/handlebars.min", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/messenger.min", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/messenger-theme-future", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/jquery.knob.min", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/chart-knobs", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/messenger-theme-flat", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/messenger", 'data-turbolinks-track': "reload"
+  = javascript_include_tag 'threejs/js/three', 'data-turbolinks-track': "reload"
+  = javascript_include_tag 'threejs/js/Detector', 'data-turbolinks-track': "reload"
+  = javascript_include_tag 'threejs/js/controls/OrbitControls', 'data-turbolinks-track': true
+  = javascript_include_tag 'threejs/js/libs/stats.min.js', 'data-turbolinks-track': "reload"
+  = javascript_include_tag 'threejs/js/renderers/CanvasRenderer', 'data-turbolinks-track': "reload"
+  = javascript_include_tag 'threejs/js/renderers/Projector', 'data-turbolinks-track': "reload"
+  = javascript_include_tag "cubes/dragcontrols", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/rooms", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/users", 'data-turbolinks-track': "reload"
+
+
+= javascript_include_tag 'https://www.gstatic.com/firebasejs/4.13.0/firebase.js', 'data-turbolinks-track': "reload"
+= javascript_include_tag 'https://www.gstatic.com/firebasejs/4.13.0/firebase-functions.js', 'data-turbolinks-track': "reload"
+= javascript_include_tag 'https://www.gstatic.com/firebasejs/ui/4.2.0/firebase-ui-auth__en.js', 'data-turbolinks-track': "reload"
+= javascript_include_tag 'firebaseapi', 'data-turbolinks-track': "reload"
+
+
+-if controller_name != 'sessions' && controller_name != 'registrations'
+  = javascript_include_tag 'savable-cube', 'data-turbolinks-track': "reload"
+
+
+-if controller_name == 'users' && action_name == "cubes"
+  = javascript_include_tag "cubes/three.min", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "cubes/THREE.MeshLine", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "cubes/orbitcontrols", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "cubes/dragcontrols", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "cubes/transformcontrols", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "cubes/pin3d_01", 'data-turbolinks-track': "reload"
+
+
+-if controller_name == 'users' && action_name == "home"
+  = javascript_include_tag 'users/sessions', 'data-turbolinks-track': "reload"
+  = javascript_include_tag 'users/registrations', 'data-turbolinks-track': "reload"
+
+
+-if controller_name == 'registrations' || (controller_name == 'users' && action_name == "edit") || action_name == 'home'
+  = javascript_include_tag   'users/select2.min', media: 'all', 'data-turbolinks-track': "reload"
+  = javascript_include_tag   'users/jquery.inputmask.bundle.min', media: 'all', 'data-turbolinks-track': "reload"
+
+
+-if controller_name == 'users'
+  = javascript_include_tag "users/icheck/icheck.min", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/bootstrap-tagsinput", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/typeahead.bundle", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/handlebars.min", 'data-turbolinks-track': "reload"
+  = javascript_include_tag   'users/users', media: 'all', 'data-turbolinks-track': "reload"
+  / = javascript_include_tag "cubes/jquery-ui.min", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/messenger.min", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/messenger-theme-future", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/messenger-theme-flat", 'data-turbolinks-track': "reload"
+  = javascript_include_tag "users/messenger", 'data-turbolinks-track': "reload"
+  = javascript_include_tag   'users/Vibrant', media: 'all', 'data-turbolinks-track': "reload"
+  = javascript_include_tag   'users/w3color', media: 'all', 'data-turbolinks-track': "reload"
+
+
+-if controller_name == 'registrations' || (controller_name == 'users' && action_name == "edit")
+
+  :javascript
+    var  autocomplete;
+    function activatePlaceSearch() {
+      input = $('#address');
+      input.each(function(){
+        autocomplete = new google.maps.places.Autocomplete(this);
+      });
+    }
+
+  = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDEjgpAJkXR6uUW8aPFxM0j9pENdjAEkSc&libraries=places&callback=activatePlaceSearch', media: 'all', 'data-turbolinks-track': "reload"

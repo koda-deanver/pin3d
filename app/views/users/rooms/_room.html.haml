@@ -1,0 +1,96 @@
+%section#main-content
+  %section#link-entry.row
+    .col-sm-12#text-holder{style: "display: none;"}
+      %h4 
+        Enter Link
+        %i.fa.fa-times-circle
+      .input-group
+        %span.input-group-addon
+          %i.fa.fa-link
+        %input.form-control#txt-link{type: 'url', name: "txtlink", placeholder: "Type link here and press enter..."}
+      %div.separator-or
+        %hr
+        %span or
+        %hr
+
+      %button#upload-content.btn.btn-secondary.btn-icon.btn-block{:type => "button"}
+        %i.fa.fa-cloud-upload
+        %span &nbsp Upload File
+
+      %form.uploader-wrapper
+        %input#file-uploader.hidden{type: 'file', name: 'upload_file'}
+    #add-collab-holder.col-sm-12{:style => "display: none;"}
+      %h4
+        Add Collaborator
+        %i.fa.fa-times-circle
+      .input-group
+        %span.input-group-addon
+          %i.fa.fa-envelope
+        %input#txt-add-collab.form-control{:name => "txt-add-collab", :placeholder => "example@email.com", :type => "email"}/
+        %span#invite-email.input-group-addon{style: "cursor: pointer;"}
+          %i.fa.fa-plus
+
+  #dialog_remove_collab{title: "Remove Collaborator", style: "display:none;"}
+    %p Do you want to delete this collaborator?
+  #confirm_del_link{title: "Remove Link", style: "display:none;"}
+    %p Do you want to delete this link?
+  #dia_collab_confirm{title: "Confirm Email", style: "display:none;"}
+    %p
+      Your are about to add  
+      %span email
+      as a collaborator.
+  #dia_update_wall{title: "Edit Wall Name", style: "display:none;"}
+    .form-group{style: "margin-top:20px;"}
+      %label.form-label{:for => "field-1"} 
+        %strong Name
+      %span.desc "Enter wall name"
+      .controls
+        %input#wall_name.form-control{:type => "text"}/
+
+
+  = render 'layouts/includes/theme_selector'
+  %section.wrapper.main-wrapper.row#rooms
+    #emoji-row{style: "display: none;"}
+      .col-sm-12.emoji-container
+        %span.fa.fa-caret-up
+        / %span.fa.fa-times-circle
+        .col-sm-6.link-category{'data-category': 'food'}
+          %img{src: "https://firebasestorage.googleapis.com/v0/b/check-yo-development-a2173.appspot.com/o/emojis%2Ffood.png?alt=media&token=9738b283-7478-452e-b470-ad05bce96b27"}
+        .col-sm-6.link-category{'data-category': 'lensed'}
+          %img{src: "https://firebasestorage.googleapis.com/v0/b/check-yo-development-a2173.appspot.com/o/emojis%2Flensed.png?alt=media&token=e65419c2-db15-4a57-bf33-fbf45dd795f2"}
+        .col-sm-6.link-category{'data-category': 'live'}
+          %img{src: "https://firebasestorage.googleapis.com/v0/b/check-yo-development-a2173.appspot.com/o/emojis%2Flive.png?alt=media&token=f179f1d1-54c3-492e-bfe7-aeb7eaa16f34"}
+        .col-sm-6.link-category{'data-category': 'publish'}
+          %img{src: "https://firebasestorage.googleapis.com/v0/b/check-yo-development-a2173.appspot.com/o/emojis%2Fpublish.png?alt=media&token=e35c410c-8c24-4c47-8c2f-90a149134346"}
+        .col-sm-6.link-category{'data-category': 'real'}
+          %img{src: "https://firebasestorage.googleapis.com/v0/b/check-yo-development-a2173.appspot.com/o/emojis%2Freal.png?alt=media&token=d5805aef-7c89-409f-ae4f-bf02956f36c6"}
+        .col-sm-6.link-category{'data-category': 'sell'}
+          %img{src: "https://firebasestorage.googleapis.com/v0/b/check-yo-development-a2173.appspot.com/o/emojis%2Fsell.png?alt=media&token=ad1b9ac3-d6ec-498d-8618-caf7ff10e348"}
+    %section#interior_cube
+      #loader
+        .loader-holder
+      / .info{style: 'display:none;'}
+      /   %p
+      /     Press
+      /     %b Shift
+      /     to show or hide help menu.
+      /     / %b Alt
+      /     / to show or hide link entry.
+      /     %br
+      /     %b Click and drag
+      /     to change room perspective.
+      /     %b Double click
+      /     on the link post to visit the page.
+      /   / .mobile-logout.hidden-lg-up.justify-content-center{style: "display: none;"}
+      /   /   %button.btn.btn-primary.btn-sm{name: 'logout'} Logout
+      /   / .desktop-logout.hidden-md-down{style: "display: none;"}
+      /   /   %button.btn.btn-primary.btn-sm{name: 'logout'} Logout
+
+      #container
+      / #text-holder
+      /   %input#txt-link{type: 'url', name: "txtlink", placeholder: "Type link here and press enter..."}
+      #log-out-holder
+        %button.btn.btn-primary.btn-sm{name: 'logout'} Logout
+      #meta-container
+
+  = render 'layouts/modals/progress_upload'

@@ -1,0 +1,36 @@
+defaults: &defaults
+  app_csfr: SecureRandom.hex(12)
+
+development:
+  <<: *defaults
+  # key:                "AIzaSyAn__Q9wrBiOSvQ3TIiWqgFRfLEhlXSQAU"
+  # authDomain:         "check-yo-development-a2173.firebaseapp.com"
+  # databaseURL:        "https://check-yo-development-a2173.firebaseio.com"
+  # projectId:          "check-yo-development-a2173"
+  # storageBucket:      "check-yo-development-a2173.appspot.com"
+  # messagingSenderId:  '38641649129'
+  key:                  "AIzaSyA_jjxUtb5rD60BIaljKLUeZeT7uWnJYP0"
+  authDomain:           "check-yo-development.firebaseapp.com"
+  databaseURL:          "https://check-yo-development.firebaseio.com"
+  projectId:            "check-yo-development"
+  storageBucket:        "check-yo-development.appspot.com"
+  messagingSenderId:    "692516154040"
+  appId:                "1:692516154040:web:4879d73d3ca0c18fb9224d"
+
+test:
+
+production:
+  <<: *defaults
+  # key:                "AIzaSyChqm1-IQsuOA45oySikFi_IvUhyxY2hCM"
+  # authDomain:         "check-yo-self-18682434.firebaseapp.com"
+  # databaseURL:        "https://check-yo-self-18682434.firebaseio.com"
+  # projectId:          "check-yo-self-18682434"
+  # storageBucket:      "check-yo-self-18682434.appspot.com"
+  # messagingSenderId:  "177025070177"
+  key:                  "AIzaSyChqm1-IQsuOA45oySikFi_IvUhyxY2hCM"
+  authDomain:           "check-yo-self-18682434.firebaseapp.com"
+  databaseURL:          "https://check-yo-self-18682434.firebaseio.com"
+  projectId:            "check-yo-self-18682434"
+  storageBucket:        "check-yo-self-18682434.appspot.com"
+  messagingSenderId:    "177025070177"
+  appId:                "1:177025070177:web:82d55f111af17d141c2620"

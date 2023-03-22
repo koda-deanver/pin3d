@@ -1,0 +1,81 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html;charset=UTF-8", "http-equiv" => "content-type"}/
+    %meta{:charset => "utf-8"}/
+    %title SindyCUBEs : Registration Page
+    %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    
+
+  %body.login_page
+    .container-fluid
+      .register-wrapper.row
+        #register.login.loginpage.col-lg-offset-2.col-lg-8.col-md-offset-1.col-sm-offset-1.col-sm-10.col-xs-offset-0.col-xs-12
+          %h1
+            / PIN
+            / %sup{style: "left: -0.3em;margin-right: -0.5em;"}3
+            SindyCUBEs
+          / = devise_error_messages!
+          - flash.each do |key, value|
+            %div{:class => "flash #{key}"}= value
+          = form_tag(cubes_users_path, id: "form-sign-up", method: :post, novalidation: false, autocomplete: 'off') do
+            .col-sm-12
+              .form-group
+                = email_field_tag :email, nil, placeholder: "Email", required: true
+            .col-sm-6
+              .form-group
+                = password_field_tag :password, nil, placeholder: "Password", required: true
+            .col-sm-6
+              .form-group
+                = password_field_tag :confirm_password, nil, placeholder: "Confirm Password", required: true
+            .col-sm-6
+              .form-group
+                = text_field_tag :firstname, nil, placeholder: "First Name", required: true
+            / .col-sm-4
+            /   .form-group
+            /     = text_field_tag :middlename, nil, placeholder: "Middle Name", required: true
+            .col-sm-6
+              .form-group
+                = text_field_tag :lastname, nil, placeholder: "Last Name", required: true
+            .col-sm-12
+              .form-group
+                = text_field_tag :gamer_tag, nil, placeholder: "Gamer Tag"
+            .col-sm-6
+              .form-group#theme-select2.registration
+                %select#country.form-control.input-lg.m-bot15
+                  %option{value: ''} Select country
+                  - ISO3166::Country.countries.sort_by(&:name).each do |country|
+                    %option{value: country.name}= country.name
+                /   %option{value: ''} Select country
+                /   - Nationality::NATIONALITY.each do |nationality|
+                /     %option{value: nationality}= nationality
+                
+
+            / .col-sm-6
+            /   .form-group
+            /     %select#identity.form-control.input-lg.m-bot15{style: "background-color: rgba(255, 255, 255, 0.6); margin: 5px 0 0; border: 0;"}
+            /       %option{value: "", disabled: true, selected: true} Identity
+            /       %option{value: "Male"} Male
+            /       %option{value: "Female"} Female
+            .col-sm-6
+              .form-group
+                .controls
+                  = text_field_tag :phone, nil, placeholder: "Phone", 'data-mask'=>'+(999) 999 999 999', style: 'margin-top: 0;'
+            .col-sm-12
+              .form-group
+                = text_field_tag :address, nil, placeholder: "Address"
+            .col-sm-12
+              = text_area_tag :bio, nil, placeholder: "Bio"
+              / = text_field_tag :username, nil, id: "lastname"
+              %p.submit
+                %input#wp-submit.btn.btn-accent.btn-block{:name => "wp-submit", :type => "submit", :value => "Sign Up"}/
+          .col-sm-12
+            %p#nav
+              %a.pull-left{:href => forgot_password_users_registrations_path, :title => "Password Lost and Found"} Forgot password?
+              %a.pull-right{:href => users_sign_in_path, :title => "Sign Up"} Sign In
+            .clearfix
+          
+    

@@ -1,0 +1,23 @@
+#form-sign-up input {
+  margin-bottom: 0 !important;
+}
+#form-sign-up textarea {
+  color: #777777;
+  resize: vertical;
+  min-height: 70px;
+}
+.select2-input {
+  margin-top: 5px !important;
+}
+.select2-chosen {
+  padding: 6px 5px;
+}
+.select2-arrow b{
+  background-position-y: 8px !important;
+}
+.registration {
+  margin-top: 5px;
+}
+.select2-drop {
+  margin-top: 5px !important;
+}

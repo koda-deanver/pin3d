@@ -1,0 +1,77 @@
+%section.section-1
+  .backdrop-container
+    .img-1
+    .img-2
+    .img-3
+    .img-4
+    .img-5.parallax-slow
+    .img-7.parallax-inverse
+    .img-8.parallax
+    .img-9.parallax-mid
+    .img-10.parallax
+    .img-11
+.section-2
+  .col-sm-8.col-sm-offset-2
+    %h1.text-center.text-bold Welcome to
+    %h1.text-center.text-bold.titlecube PinCUBED
+    .embed-responsive.embed-responsive-16by9
+      %iframe{:allow => "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", :allowfullscreen => "", :frameborder => "0", :height => "100%", :src => "https://www.youtube.com/embed/QaO7ph5OQHg", :width => "100%"}
+
+    %h3.description.text-center.text-bold PINCUBED is a Software as a Service Website which enables YOU to organize your Solo and Collaborative Projects in a Visual manner.
+    %h3.more-desc.text-center.text-bold You curate the internet the way you want it.
+    %h3.more-desc.text-center.text-bold Find it. Pin it. Do it.
+    %h3.more-desc.text-center.text-bold Build a cube. Fill it with the things you love.
+    %h3.more-desc.text-center.text-bold Work alone. Work together.
+    %h3.more-desc.text-center.text-bold Share what you've done. Keep it for yourself.
+    %h3.more-desc.text-center.text-bold Be a catalyst for good.
+    %h3.more-desc.text-center.text-bold It's pinning with a purpose.
+
+%section#section-2-b.section-2-b.row.container 
+  / .register-wrapper.row
+  .col-sm-10.col-sm-offset-1
+    .register-wrapper.homepage.row
+      #register.login.loginpage.col-lg-offset-2.col-lg-8.col-md-offset-1.col-sm-offset-1.col-sm-10.col-xs-offset-0.col-xs-12
+        %h1.text-white
+          Registration
+        = form_tag(cubes_users_path, id: "form-sign-up", method: :post, novalidation: false, autocomplete: 'off') do
+          .col-sm-6
+            .form-group
+              = text_field_tag :firstname, nil, placeholder: "First Name", required: true
+          .col-sm-6
+            .form-group
+              = text_field_tag :lastname, nil, placeholder: "Last Name", required: true
+          .col-sm-12
+            .form-group
+              = email_field_tag :email, nil, placeholder: "Email", required: true
+          .col-sm-12
+            .form-group
+              = password_field_tag :password, nil, placeholder: "Password", required: true
+          .col-sm-12
+            .form-group
+              = password_field_tag :confirm_password, nil, placeholder: "Confirm Password", required: true
+          .col-sm-12
+            %p.submit
+              %input#wp-submit.btn.btn-accent.btn-block{:name => "wp-submit", :type => "submit", :value => "Sign Up"}/
+  .col-xs-12
+    %h3.text-center{style: "color: white;"} Login With
+  .clearfix
+  .col-xs-12.col-sm-12.cube-wrapper.noselect
+    .cube-wrapper-inner
+      .container-cube
+        %figure.cube
+          .front.facebook
+            %button#fb-sign-in.facebook
+              %i.fa.fa-facebook
+          .left 2
+          .right
+            %button#google-sign-in.google
+              %i.fa.fa-google-plus
+          .top.phone
+            %button.phone-sign-in.phone
+              %i.fa.fa-mobile{data: {toggle: :modal, target: "#phone-popup"}}
+          .bottom 5
+          .back 6
+= render 'layouts/modals/phonepop'
+= render 'layouts/footer'
+
+

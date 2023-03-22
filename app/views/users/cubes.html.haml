@@ -1,0 +1,278 @@
+
+%body
+  %section#main-content
+    %section.wrapper.main-wrapper.row{:style => "position: relative;"}
+      %section#link-entry.users.row
+        .col-sm-12#text-holder{style: "display: none;"}
+          %h4 
+            Enter Cube Name
+            %i.fa.fa-times-circle
+          .input-group
+            %span.input-group-addon
+              %i.fa.fa-cube
+            %input.form-control#find-cubes{type: 'url', name: "find-cubes", placeholder: "Enter cube name to search..."}
+
+      %section#cube-detail-entry{style: "display: none;"}
+        .row
+          .col-sm-12
+            .form-group.has-info
+              .controls
+                %input#cube-name.form-control{:placeholder => "Cube Name", :type => "text"}/
+          .col-sm-12
+            .form-group.has-info
+              .controls
+                %textarea#cube-description.form-control{:placeholder => "Cube Description", :cols => "2"}
+          
+        .row
+          .col-sm-4{style: "padding-right: 7.5px"}
+            %button#btn-create-cube.btn.btn-default.btn-group-justified{:type => "button"} Create
+          .col-sm-4{style: "padding-left: 7.5px; padding-right: 7.5px;"}
+            %button#btn-assign-walls.btn.btn-default.btn-group-justified{:type => "button"} Assign Walls
+          .col-sm-4{style: "padding-left: 7.5px"}
+            %button#btn-assign-questions.btn.btn-default.btn-group-justified{:type => "button"} Assign Questions  
+
+      %section#wall-collab-entry{style: "display: none;"}
+        .row
+          .col-sm-12.bottom15
+            .input-group.primary
+              %input#red-wall-control.form-control{"aria-describedby" => "red-wall", :placeholder => "Email", :type => "email", "data-wall" => 1}/
+              %span#red-wall.input-group-addon
+                %span.arrow
+
+          .col-sm-12.bottom15
+            .input-group.primary
+              %input#green-wall-control.form-control{"aria-describedby" => "green-wall", :placeholder => "Email", :type => "email", "data-wall" => 5}/
+              %span#green-wall.input-group-addon
+                %span.arrow
+
+          .col-sm-12.bottom15
+            .input-group.primary
+              %input#blue-wall-control.form-control{"aria-describedby" => "blue-wall", :placeholder => "Email", :type => "email", "data-wall" => 3}/
+              %span#blue-wall.input-group-addon
+                %span.arrow
+
+          .col-sm-12.bottom15
+            .input-group.primary
+              %input#yellow-wall-control.form-control{"aria-describedby" => "yellow-wall", :placeholder => "Email", :type => "email", "data-wall" => 4}/
+              %span#yellow-wall.input-group-addon
+                %span.arrow
+
+          .col-sm-12.bottom15
+            .input-group.primary
+              %input#sky-blue-wall-control.form-control{"aria-describedby" => "sky-blue-wall", :placeholder => "Email", :type => "email", "data-wall" => 2}/
+              %span#sky-blue-wall.input-group-addon
+                %span.arrow
+
+          .col-sm-12.bottom15
+            .input-group.primary
+              %input#magenta-wall-control.form-control{"aria-describedby" => "magenta-wall", :placeholder => "Email", :type => "email", "data-wall" => 0}/
+              %span#magenta-wall.input-group-addon
+                %span.arrow
+          .col-sm-12
+            %button#close-asign.btn.btn-default.btn-group-justified{:type => "button"} Close
+
+      %section#assign-question-entry{style: "display: none;"}
+        .row
+          #category-accordion.panel-group.questions-popup{:style => "padding: 0 15px;"}
+
+      #cube-collab-indicator{style: "display: none;"}
+        .indicator-holder
+          .title 
+            / %i.fa.fa-header.text-success 
+            %span Cube Name
+          .description
+          %p.uilabels.text-md
+            %span.label.label-info
+              %i.fa.fa-info
+              Collaborator
+          %i.fa.fa-caret-right
+
+      .col-lg-12.bg-floater
+        %section.cube-options.fixed-bg{style: 'background-color: transparent;'}
+          .row.categories.projects
+            .col-xs-8
+              .col-xs-4
+                %span.display-create{style: 'background-color: #FF00FF; color: black;', 'data-color': 0} LIVE
+              .col-xs-4
+                %span.display-create{style: 'background-color: #FFFF00; color: black;', 'data-color': 1} LENSED
+              .col-xs-4
+                %span.display-create{style: 'background-color: #008000; color: black;', 'data-color': 2} FOOD
+              .col-xs-4
+                %span.display-create{style: 'background-color: #00FFFF; color: black;', 'data-color': 3} REAL
+              .col-xs-4
+                %span.display-create{style: 'background-color: #FF0000; color: black;', 'data-color': 4} SELL
+              .col-xs-4
+                %span.display-create{style: 'background-color: #0000FF; color: black;', 'data-color': 5} PUBs
+            .col-xs-4.blank
+              %span.display-create{style: 'background-color: #808080; color: black;', 'data-color': 6} CUSTOM
+             
+          .bg-holder-selector
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/island.png', 'data-bg' => '/assets/users/island.png'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/light.png', 'data-bg' => '/assets/users/light.png'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/night.png', 'data-bg' => '/assets/users/night.png'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/water.png', 'data-bg' => '/assets/users/water.png'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/heros.png', 'data-bg' => '/assets/users/heros.png'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/fruit.png', 'data-bg' => '/assets/users/fruit.png'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/agency.png', 'data-bg' => '/assets/users/agency.png'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/book.png', 'data-bg' => '/assets/users/book.png'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/city.png', 'data-bg' => '/assets/users/city.png'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/shadow.png', 'data-bg' => '/assets/users/shadow.png'}
+
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/theme-01.png', 'data-bg' => '/assets/users/theme-01'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/theme-02.png', 'data-bg' => '/assets/users/theme-02.png'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/theme-03.png', 'data-bg' => '/assets/users/theme-03.png'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/theme-04.png', 'data-bg' => '/assets/users/theme-04.png'}
+
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/theme-05.png', 'data-bg' => '/assets/users/theme-05'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/theme-06.png', 'data-bg' => '/assets/users/theme-06.png'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/theme-07.png', 'data-bg' => '/assets/users/theme-07.jpg'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/theme-08.png', 'data-bg' => '/assets/users/theme-08.jpeg'}
+
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/theme-09.png', 'data-bg' => '/assets/users/theme-09.jpeg'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/theme-10.png', 'data-bg' => '/assets/users/theme-10.jpeg'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/theme-11.png', 'data-bg' => '/assets/users/theme-11.jpeg'}
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/theme-12.png', 'data-bg' => '/assets/users/theme-12.jpeg'}
+
+            .col-sm-12.col-xs-3.bg-image-holder
+              %img.image{src: '/assets/users/theme-icon/theme-13.png', 'data-bg' => '/assets/users/theme-13.jpeg'}
+
+
+          .row.cube_search
+            .seven-cols
+
+              .col-lg-1.col-md-3.col-sm-4.col-xs-6.padding-05
+                .staff-photo.box-pro{'data-color': 0}
+                  live
+              .col-lg-1.col-md-3.col-sm-4.col-xs-6.padding-05
+                .staff-photo.box-pro{'data-color': 1}
+                  Lensed
+              .col-lg-1.col-md-3.col-sm-4.col-xs-6.padding-05
+                .staff-photo.box-pro{'data-color': 3}
+                  real
+              .col-lg-1.col-md-3.col-sm-4.col-xs-6.padding-05
+                .staff-photo.box-pro{'data-color': 5}
+                  publish
+              .col-lg-1.col-md-3.col-sm-4.col-xs-6.padding-05
+                .staff-photo.box-pro{'data-color': 4}
+                  sell
+              .col-lg-1.col-md-3.col-sm-4.col-xs-6.padding-05
+                .staff-photo.box-pro{'data-color': 2}
+                  food
+              .col-lg-1.col-md-3.col-sm-4.col-xs-6.padding-05
+                .staff-photo.box-pro{'data-color': 6}
+                  Custom
+            .clearfix
+            
+            .col-md-12.hashtag-data
+              .input-group{style: 'width: 100%;'}
+                %input#usr.form-control{:name => "txt-add-collab", :placeholder => "HASHTAGS", :type => "text"}/
+            .row.seven-cols{style: 'overflow-y: scroll; height: 100px;'}
+              .col-xs-12.cube_hold{style: 'padding: 0px;'}
+                .col-xs-2.padding-05#src-cube-0
+                  .staff-photo.box-pro1
+                .col-xs-2.padding-05#src-cube-1
+                  .staff-photo.box-pro1
+                .col-xs-2.padding-05#src-cube-2
+                  .staff-photo.box-pro1
+                .col-xs-2.padding-05#src-cube-3
+                  .staff-photo.box-pro1
+                .col-xs-2.padding-05#src-cube-4
+                  .staff-photo.box-pro1
+                .col-xs-2.padding-05#src-cube-5
+                  .staff-photo.box-pro1
+                .col-xs-2.padding-05#src-cube-6
+                  .staff-photo.box-pro1
+                .col-xs-2.padding-05#src-cube-7
+                  .staff-photo.box-pro1 
+                .col-xs-2.padding-05#src-cube-8
+                  .staff-photo.box-pro1 
+                .col-xs-2.padding-05#src-cube-9
+                  .staff-photo.box-pro1
+                .col-xs-2.padding-05#src-cube-10
+                  .staff-photo.box-pro1
+                .col-xs-2.padding-05#src-cube-11
+                  .staff-photo.box-pro1           
+
+
+      / MAIN CONTENT AREA STARTS          
+      .col-lg-12.cube-box{style: 'padding: 0'}
+        %section{style: 'background-color: transparent;'}
+          .content-body.preload-cubes.no-padding{style: 'background-color: transparent;'}
+            .row
+              .col-xs-12.no-padding
+                .cube-container
+                  .cube-canvas
+                    .page-container
+                      #dialog{title: "Add Cube", style: "display:none;"}
+                        %p Enter Cube Name here.
+                        %input{type:"text", style: "width: 100%;"}
+                        %p Description
+                        %textarea{:cols => "30", :name => "message", :rows => "3"}
+                      #dialog_collab{title: "Collaborators", style: "display:none;"}
+                        .input-group
+                          %span.input-group-addon
+                            %i.fa.fa-envelope
+                          %span.twitter-typeahead{:style => "position: relative; display: inline-block; direction: ltr;"}
+                            %input#collab.form-control
+                        %input#added-collab
+                      #dia_collab_confirm{title: "Confirm Email", style: "display:none;"}
+                        %p
+                          Your are about to add  
+                          %span email
+                          as a collaborator.
+                      #dialog_remove{title: "Remove Cube", style: "display:none;"}
+                        %p Do you want to delete this cube? All links belong to this cube will also be removed.
+                      #dialog_publish{title: "Unpublish Cube", style: "display:none;"}
+                        %p Do you want to unpublish this cube?
+                      / Modal
+                      #myModal.modal.fade{:role => "dialog"}
+                        .modal-dialog
+                          / Modal content
+                          .modal-content
+                            .modal-header
+                              %button.close{"data-dismiss" => "modal", :type => "button"} ×
+                              %h4.modal-title Terms & Condition
+                            .modal-body
+                              %p
+                              .terms
+                                %input{:name => "agree", :id => "agree", :type => "checkbox", :value => "1"}
+                                %b I agree to the Terms and Conditions.
+
+                            .modal-footer
+                              %button.btn.btn-default.submit{:type => "button"} Submit
+                              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+
+                    / %iframe.cube-canvas{style: "width:100%; height:600px;"}
+                    .cube-canvas-holder{style: "width:100%; height:600px;"}
+
+                    / .add-container
+                    /   %button#add-a-cube
+                    /     %i.fa.fa-plus-circle
+      
+      %section#edit-questions-popup{:style => "display: none;max-height: 510px;min-height: 200px;background: #23394b;position: absolute;top: 15px;left: 200px;width: 500px;padding: 15px;overflow-y: auto;"}
+        .row
+          #edit-category-accordion.panel-group.questions-popup{:style => "padding: 0 15px;"}
+
+  = render 'layouts/modals/progress_cube_create'
